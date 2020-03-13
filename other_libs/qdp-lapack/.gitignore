@@ -1,0 +1,7 @@
+aclocal.m4
+configure
+include/Makefile.in
+lib/Makefile.in
+Makefile.in
+autom4te.cache
+include/qdp-lapack_config_internal.h.in~
