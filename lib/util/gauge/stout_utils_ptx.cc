@@ -6,7 +6,7 @@
 using namespace QDP;
 
 
-CUfunction function_get_fs_bs_exec(CUfunction function, 
+hipFunction_t function_get_fs_bs_exec(hipFunction_t function, 
 				   const LatticeColorMatrix& Q,
 				   const LatticeColorMatrix& QQ,
 				   multi1d<LatticeComplex>& f,
@@ -61,7 +61,7 @@ WordREG<REAL> jit_constant( double f )
 }
 
 
-CUfunction function_get_fs_bs_build(const LatticeColorMatrix& Q,
+hipFunction_t function_get_fs_bs_build(const LatticeColorMatrix& Q,
 				    const LatticeColorMatrix& QQ,
 				    multi1d<LatticeComplex>& f,
 				    multi1d<LatticeComplex>& b1,
@@ -70,7 +70,7 @@ CUfunction function_get_fs_bs_build(const LatticeColorMatrix& Q,
 {
   //std::cout << __PRETTY_FUNCTION__ << ": entering\n";
 
-  CUfunction func;
+  hipFunction_t func;
 
   jit_start_new_function();
 

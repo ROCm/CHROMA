@@ -279,6 +279,16 @@ AC_ARG_WITH(cuda,
 )
 
 
+AC_ARG_WITH(hip,
+   AC_HELP_STRING(
+      [--with-hip=<DIR>],
+      [Use HIP installation in DIR]
+   ),
+   [ HIP_HOME=${with_hip} ],
+   [ HIP_HOME="/opt/rocm" ]
+)
+
+
 AC_ARG_WITH(qphix-solver,
   AC_HELP_STRING(
     [--with-qphix-solver=DIR],
@@ -1253,19 +1263,19 @@ then
 
    case "$host" in 
    x86_64*|ppc64*|powerpc64*)
-        CUDA_LIBDIR="${CUDA_HOME}/lib64"	
+        HIP_LIBDIR="${HIP_HOME}/lib"	
 	;;
    *)	
-   CUDA_LIBDIR="${CUDA_HOME}/lib"
+   HIP_LIBDIR="${HIP_HOME}/lib"
    ;;	
    esac
 	
-   AC_MSG_NOTICE([ Linking to CUDA Runtime in ${CUDA_LIBDIR}])
+   AC_MSG_NOTICE([ Linking to HIP Runtime in ${HIP_LIBDIR}])
 
    AC_DEFINE([BUILD_QUDA],[], [Build with the BU QUDA Library])  
-   AC_SUBST(QUDA_CXXFLAGS, ["-I${QUDA_HOME}/include -I${CUDA_HOME}/include"] )
-   AC_SUBST(QUDA_LDFLAGS,  ["-L${CUDA_LIBDIR} -L${QUDA_HOME}/lib -Wl,-rpath,${CUDA_LIBDIR} -Wl,-rpath,${QUDA_HOME}/lib"] )
-   AC_SUBST(QUDA_LIBS,     ["-lquda -lcublas -lcudart -lcuda"])
+   AC_SUBST(QUDA_CXXFLAGS, ["-I${QUDA_HOME}/include -I${HIP_HOME}/include -I/opt/qmp/include -D__HIP_PLATFORM_HCC__"] )
+   AC_SUBST(QUDA_LDFLAGS,  ["-L${HIP_LIBDIR} -L${QUDA_HOME}/lib -Wl,-rpath,${HIP_LIBDIR} -Wl,-rpath,${QUDA_HOME}/lib"] )
+   AC_SUBST(QUDA_LIBS,     ["-lquda -lhipblas -lhip_hcc"])
 
 fi
 

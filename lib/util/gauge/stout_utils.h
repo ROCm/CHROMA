@@ -11,13 +11,13 @@
 #if 0
 #ifdef QDP_IS_QDPJIT
 #ifdef QDPJIT_IS_QDPJITPTX
-CUfunction function_get_fs_bs_build(const LatticeColorMatrix& Q,
+hipFunction_t function_get_fs_bs_build(const LatticeColorMatrix& Q,
                                     const LatticeColorMatrix& QQ,
                                     multi1d<LatticeComplex>& f,
                                     multi1d<LatticeComplex>& b1,
                                     multi1d<LatticeComplex>& b2,
                                     bool dobs);
-CUfunction function_get_fs_bs_exec(CUfunction function,
+hipFunction_t function_get_fs_bs_exec(hipFunction_t function,
                                    const LatticeColorMatrix& Q,
                                    const LatticeColorMatrix& QQ,
                                    multi1d<LatticeComplex>& f,

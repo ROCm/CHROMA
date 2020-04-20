@@ -14,7 +14,7 @@
 #include "meas/inline/io/named_objmap.h"
 #include "actions/ferm/invert/quda_solvers/syssolver_quda_multigrid_clover_params.h"
 
-#include <cuda_runtime_api.h>
+#include <hip/hip_runtime_api.h>
 
 namespace Chroma {
 
@@ -451,11 +451,11 @@ namespace Chroma {
 		inline	
 		size_t getCUDAFreeMem(void) 
 	        {
-		   cudaError_t ret;
+		   hipError_t ret;
    	           size_t free, total;
-	           ret = cudaMemGetInfo( &free, &total );
-		   if ( ret != cudaSuccess ) { 
-			QDPIO::cout << "cudaMemGetInfo() returned unsuccesful status: " <<  ret << std::endl;
+	           ret = hipMemGetInfo( &free, &total );
+		   if ( ret != hipSuccess ) { 
+			QDPIO::cout << "hipMemGetInfo() returned unsuccesful status: " <<  ret << std::endl;
 			QDP_abort(1);
                    }
 	           return free;
